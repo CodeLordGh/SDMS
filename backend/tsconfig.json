@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "es5",   // Adjust as needed (e.g., "es2015")
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]  // Optional: Map "@/" to "src/" for easier imports
+      }
+    },
+    "include": ["src"]
+  }
+  
