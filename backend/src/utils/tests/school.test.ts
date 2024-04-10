@@ -57,5 +57,10 @@ describe("GET /schools", () => {
         expect(response.body).toHaveProperty("message")
     });
 
-    
+    it("responds school sccessfully retreived", async () => {
+        const response = await request(app).get("/schools/:id")/* replace :id with actual id*/.send()
+
+        expect(response.status).toBe(200)
+        expect(response.body).toHaveProperty("message")
+    })
 })
