@@ -64,3 +64,26 @@ describe("GET /schools", () => {
         expect(response.body).toHaveProperty("message")
     })
 })
+
+describe("DELETE /schools/:id", () => {
+    it("responds with 405 for invalid request method", async () => {
+        const response = await request(app).delete("/schools/registration").send();
+    
+        expect(response.status).toBe(405);
+        expect(response.body).toHaveProperty("message");
+    });
+
+    it("responds with 404 for invalid id", async () => {
+        const response = await request(app).delete("/schools/:id").send();
+    
+        expect(response.status).toBe(404);
+        expect(response.body).toHaveProperty("message");
+    });
+
+    it("responds with 200 for valid id", async () => {
+        const response = await request(app).delete("/schools/:id").send();
+    
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("message");
+    });
+})
