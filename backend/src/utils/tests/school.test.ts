@@ -2,6 +2,19 @@ import app from "@/app";
 import request from "supertest";
 
 describe("POST /schools/registration", () => {
+
+    it("responds with 400 for SQL injection attempt", async () => {
+        const response = await request(app).post("/schools/registration").send({
+            ownerName: "Ali Koffi' OR 1=1 --",
+            schoolName: "HolyStar Int.School",
+            schoolHotline: "0542233516",
+            location: "Sapeiman"
+        });
+    
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message");
+    });
+
     it("respond registration successfull", async () => {
         const response = await request(app).post("/schools/registration").send({
             ownerName: "Ali Koffi",
