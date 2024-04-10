@@ -15,6 +15,18 @@ describe("POST /schools/registration", () => {
         expect(response.body).toHaveProperty("message");
     });
 
+    it("responds with 400 for XSS attack attempt", async () => {
+        const response = await request(app).post("/schools/registration").send({
+            ownerName: "Ali Koffi<script>alert('XSS')</script>",
+            schoolName: "HolyStar Int.School",
+            schoolHotline: "0542233516",
+            location: "Sapeiman"
+        });
+    
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message");
+    });
+
     it("respond registration successfull", async () => {
         const response = await request(app).post("/schools/registration").send({
             ownerName: "Ali Koffi",
